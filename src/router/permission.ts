@@ -7,8 +7,10 @@ export function setupPageGuard(router: Router) {
     if (!authStore.session) {
       try {
         const data = await authStore.getSession()
-        if (String(data.auth) === 'false' && authStore.token)
+        if (String(data.auth) === 'false' && authStore.token) {
           authStore.removeToken()
+          next({ name: 'login' })
+        }
         if (to.path === '/500')
           next({ name: 'Root' })
         else
@@ -18,7 +20,7 @@ export function setupPageGuard(router: Router) {
         if (to.path !== '/500')
           next({ name: '500' })
         else
-          next()
+          next({ name: 'login' })
       }
     }
     else {

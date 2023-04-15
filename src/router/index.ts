@@ -7,6 +7,11 @@ import { ChatLayout } from '@/views/chat/layout'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    name: 'login',
+    component: () => import('@/views/login/login.vue'),
+  },
+  {
+    path: '/root',
     name: 'Root',
     component: ChatLayout,
     redirect: '/chat',
@@ -18,7 +23,6 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-
   {
     path: '/404',
     name: '404',
